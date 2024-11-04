@@ -19,6 +19,14 @@ void GG::Window::run()
     {
        if(current_scene != nullptr)
 	 current_scene->run();
+
+       if(current_scene->should_change())
+	 {
+	   auto next_id = current_scene->get_next_id();
+	   delete current_scene;
+	   current_scene = scenes[next_id]();
+	 }
+       
       draw();
     }
 }
