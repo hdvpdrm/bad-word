@@ -3,11 +3,13 @@
 GG::Window::Window(const char* title)
 {
   InitWindow(640,480,title);
+  InitAudioDevice();
   ClearWindowState(FLAG_WINDOW_RESIZABLE);	// window isn't resizable
   SetTargetFPS(60);
 }
 GG::Window::~Window()
 {
+  CloseAudioDevice();
   CloseWindow();
 }
 
