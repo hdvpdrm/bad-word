@@ -20,6 +20,7 @@ public:
   virtual void run()=0;
   virtual void draw()=0;
 
+  bool should_change() {return should_quit;}
 };
 };
 #endif
