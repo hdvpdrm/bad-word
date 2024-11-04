@@ -3,6 +3,10 @@
 #include"BaseScene.h"
 #include"font.h"
 #include"Timer.h"
+#include"sounds/sound1.h"
+#include"sounds/sound2.h"
+#include"sounds/sound3.h"
+#include"sounds/sound4.h"
 #include<string>
 #include<functional>
 #include<raylib.h>
@@ -12,8 +16,7 @@
 class StartMenu: public GG::BaseScene
 {
  private:
-  Font label_font, button_font;
-  Color label_color = {5,0,12,255};
+  Font button_font;
   Color fuck_color = {183,178,190,255};
   bool fuck_pressed_checkers[4] = {true,false,false,false};
   const std::function<bool()> key_predicats[4] = {
@@ -23,6 +26,10 @@ class StartMenu: public GG::BaseScene
     CHECK_KEY_LAMBDA(KEY_K)
   };
   short lambda_to_choose = 0;
+
+  Wave fuck_waves[4];
+  Sound fuck_sounds[4];
+  
   void check_keys();
   
   std::string get_fuck_to_draw();

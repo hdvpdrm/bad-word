@@ -3,20 +3,38 @@
 
 StartMenu::StartMenu(int id, int next_id):GG::BaseScene(id,next_id)
 {
-  label_font = LoadFontFromMemory(".ttf", fibberish_ttf, fibberish_ttf_len, 48, NULL, 0);
   button_font = LoadFontFromMemory(".ttf", fibberish_ttf, fibberish_ttf_len, 50, NULL, 0);
 
-  if(!IsFontReady(label_font) && !IsFontReady(button_font))
+  if(!IsFontReady(button_font))
     {
       printf("%s\n","failed to load font!");
     }
 
+  
+  fuck_waves[0] = LoadWaveFromMemory(".wav",__1_wav,__1_wav_len);
+  fuck_sounds[0] = LoadSoundFromWave(fuck_waves[0]);
+    
+  fuck_waves[1] = LoadWaveFromMemory(".wav",__2_wav,__2_wav_len);
+  fuck_sounds[1] = LoadSoundFromWave(fuck_waves[1]);
+  
+  fuck_waves[2] = LoadWaveFromMemory(".wav",__4_wav,__4_wav_len);
+  fuck_sounds[2] = LoadSoundFromWave(fuck_waves[2]);
+  
+  fuck_waves[3] = LoadWaveFromMemory(".wav",__3_wav,__3_wav_len);
+  fuck_sounds[3] = LoadSoundFromWave(fuck_waves[3]);
+
+  
   printf("%s\n","created starting menu!");
 }
 StartMenu::~StartMenu()
 {
-  UnloadFont(label_font);
   UnloadFont(button_font);
+
+  for(size_t i = 0;i<4;++i)
+    {
+      UnloadWave(fuck_waves[i]);
+      UnloadSound(fuck_sounds[i]);
+    }
 }
 
 void StartMenu::run()
@@ -27,10 +45,7 @@ void StartMenu::run()
     }
   else
     {
-      if(IsKeyReleased(KEY_SPACE))
-	{
-	  should_quit = true;
-	}
+      should_quit = true;
     }
 
   
@@ -43,16 +58,8 @@ void StartMenu::run()
 }
 void StartMenu::draw()
 {
-  DrawTextEx(label_font,"Bad Word",(Vector2){200,100},48,0,label_color);
-
   if(lambda_to_choose != 4)
-    DrawTextEx(button_font,get_fuck_to_draw().c_str(),(Vector2){245,240},50,0,fuck_color);
-  else
-    {
-      DrawTextEx(button_font,"press",(Vector2){100,240},50,0,label_color);
-      DrawTextEx(button_font,"SPACE",(Vector2){230,240},50,0,fuck_color);
-      DrawTextEx(button_font,"to play!",(Vector2){370,240},50,0,label_color);
-    }
+    DrawTextEx(button_font,get_fuck_to_draw().c_str(),(Vector2){245,200},50,0,fuck_color);
 }
 std::string StartMenu::get_fuck_to_draw()
 {
@@ -69,9 +76,9 @@ void StartMenu::check_keys()
 {
   if(key_predicats[lambda_to_choose]())
     {
+      PlaySound(fuck_sounds[lambda_to_choose]);
       ++lambda_to_choose;
       if(lambda_to_choose != 4)
 	fuck_pressed_checkers[lambda_to_choose] = true;
     }
-
 }
