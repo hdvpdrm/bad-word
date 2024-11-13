@@ -11,15 +11,17 @@ Grid::Grid()
 	  }
 	grid.push_back(line);
       }
-	  
-	    
+	  	   
+    create_random_bad_word();
+    create_random_bad_word();
 
-    create_random_bad_word();
-    create_random_bad_word();
+    fuck_complete_wav = LoadWaveFromMemory(".wav",fuck_sound_wav,fuck_sound_wav_len);
+    fuck_complete_sound = LoadSoundFromWave(fuck_complete_wav);
 }
 Grid::~Grid()
 {
-
+  UnloadWave(fuck_complete_wav);
+  UnloadSound(fuck_complete_sound);
 }
 std::string& Grid::get_element(const iVector2& pos)
 {
@@ -39,6 +41,7 @@ void Grid::create_random_bad_word()
   auto positions = get_free_spaces();
   if(positions.empty())
     {
+      can_play = false;
       return;
     }
   
@@ -204,6 +207,7 @@ int Grid::get_score()
 	{
 	  grid[y][x].clear();
 	  ++score;
+	  PlaySound(fuck_complete_sound);
 	}
 
   return score;
