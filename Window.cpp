@@ -23,8 +23,10 @@ void GG::Window::run()
        if(current_scene->should_change())
 	 {
 	   auto next_id = current_scene->get_next_id();
+	   auto ret_val = current_scene->get_return_value();
 	   delete current_scene;
 	   current_scene = scenes[next_id]();
+	   current_scene->set_return_value(ret_val);
 	 }
        
       draw();
