@@ -3,9 +3,10 @@
 #include<string>
 #include<vector>
 #include<algorithm>
+#include<raylib.h>
 #include"Vector2.h"
 #include"BadWordRandomizer.h"
-
+#include"sounds/fuck_sound.h"
 class Grid
 {
  private:
@@ -13,6 +14,9 @@ class Grid
   BadWordRandomizer word_randomizer;
 
   bool can_play = true;
+
+  Wave fuck_complete_wav;
+  Sound fuck_complete_sound;
  public:
   Grid();
   ~Grid();
