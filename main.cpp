@@ -1,6 +1,7 @@
 #include"Window.h"
 #include"StartMenu.h"
 #include"GameScene.h"
+#include"EndScene.h"
 
 int main()
 {
@@ -16,6 +17,10 @@ int main()
   if(window.add(1,[](){return new GameScene(1,2);}))
     {
       printf("%s\n","Game scene is added successfully.");
+    }
+  if(window.add(2,[](){return new EndScene(2,0);}))
+    {
+      printf("%s\n","Ending scene is added successfully.");
     }
   
   if(window.set_initial_scene(0))
