@@ -11,7 +11,13 @@ GameScene::~GameScene()
 }
 void GameScene::run()
 {
-  if(!grid.is_able_to_play())return;
+  if(!grid.is_able_to_play() ||
+     INT_MAX-1 == score)
+    {
+      should_quit = true;
+      return_value["score"] = std::to_string(score);
+      return;
+    }
 
   auto dir = update();
   grid.move(dir);

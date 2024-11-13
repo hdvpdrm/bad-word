@@ -11,6 +11,7 @@
 #include<vector>
 #include<list>
 #include<algorithm>
+#include<limits.h>
 
 using Random = effolkronium::random_static;
 class GameScene: public GG::BaseScene
