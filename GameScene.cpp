@@ -37,7 +37,7 @@ void GameScene::draw_words()
 	auto x_pos = (x*80)+125 - (val.size()*3.5);
 	auto y_pos = (y*80)+80;
 
-	DrawTextEx(font,val.c_str(),(Vector2){x_pos,y_pos},32,0,fuck_color);
+	DrawTextEx(font,val.c_str(),(Vector2){(float)x_pos,(float)y_pos},32,0,fuck_color);
       }
 }
 void GameScene::draw_matrix()
